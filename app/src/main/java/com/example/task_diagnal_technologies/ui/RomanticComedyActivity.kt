@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.task_diagnal_technologies.R
 import com.example.task_diagnal_technologies.api.DataHelper
 import com.example.task_diagnal_technologies.ui.adapter.RomanticComedyAdapter
+import com.example.task_diagnal_technologies.ui.adapter.RomanticComedyPaggingAdapter
 import com.example.task_diagnal_technologies.utils.*
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -23,8 +24,9 @@ class RomanticComedyActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         init()
-        setObserver()
         loadData()
+        setObserver()
+
 
     }
 
@@ -43,11 +45,14 @@ class RomanticComedyActivity : AppCompatActivity() {
     }
 
     private fun setObserver() {
-        romanticComedyViewModel.mutableLiveData.observe(this, Observer {
+
+        var adapter = RomanticComedyPaggingAdapter()
+        recyclerview.adapter = adapter
+
+        romanticComedyViewModel.state.observe(this, Observer {
             when(it){
                 is RomanticComedystate.Succes -> {
-                    Log.i("sdcbdj",it.responce.toString())
-                    recyclerview.adapter = RomanticComedyAdapter(this,it.responce.page.contentItems.content)
+                   // recyclerview.adapter = RomanticComedyAdapter(this,it.responce.page.contentItems.content)
                     loader.gone()
                 }
                 is RomanticComedystate.Failure -> {
@@ -57,5 +62,10 @@ class RomanticComedyActivity : AppCompatActivity() {
                 }
             }
         })
+
+        romanticComedyViewModel.moviePagedList.observe(this, Observer {
+            adapter.submitList(it!!)
+        })
+
     }
 }

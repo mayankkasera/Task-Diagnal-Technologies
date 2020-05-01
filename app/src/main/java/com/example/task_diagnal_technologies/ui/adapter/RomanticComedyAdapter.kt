@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.romantic_comedy.view.*
 class RomanticComedyAdapter(val context: Context,var list : List<RomanticComedy.Page.ContentItems.Content>) :
     RecyclerView.Adapter<RomanticComedyAdapter.RomanticComedyViewHolder>() {
 
-    class RomanticComedyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class RomanticComedyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val image = itemView.image
         val text = itemView.text
     }

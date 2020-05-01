@@ -21,9 +21,10 @@ data class RomanticComedy(
     ) {
         data class ContentItems(
             @SerializedName("content")
-            var content: List<Content> = listOf()
+            var content: MutableList<Content> = mutableListOf()
         ) {
             data class Content(
+                var id : Int = 0,
                 @SerializedName("name")
                 var name: String = "",
                 @SerializedName("poster-image")

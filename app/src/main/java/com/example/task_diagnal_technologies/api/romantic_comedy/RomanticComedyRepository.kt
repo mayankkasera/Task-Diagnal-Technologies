@@ -8,9 +8,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class RomanticComedyRepository(var romanticComedyRequests: RomanticComedyRequests) : RomanticComedyRepositoryI{
-    override fun getRomanticComedy(): Observable<RomanticComedy> {
+    override fun getRomanticComedy(page : String): Observable<RomanticComedy> {
         return Observable.create<RomanticComedy> { emitter ->
-            romanticComedyRequests.getRomanticComedy().enqueue(object :
+            romanticComedyRequests.getRomanticComedy(page).enqueue(object :
                 Callback<RomanticComedy> {
                 override fun onResponse(call: Call<RomanticComedy>, response: Response<RomanticComedy>) {
                     Log.i("kdsjcn", "onResponse  body : " + response.body().toString())
