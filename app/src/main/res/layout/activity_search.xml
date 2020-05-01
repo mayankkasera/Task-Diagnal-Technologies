@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.RomanticComedyActivity">
+    tools:context=".ui.SearchActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -19,6 +19,8 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.Toolbar
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -32,23 +34,27 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:id="@+id/edit"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:layout_marginLeft="2dp"
+                    android:layout_marginRight="20dp"
                     android:gravity="center_vertical"
-                    android:text="@string/app_name"
+                    android:hint="Search..."
+                    android:textColorHint="@color/white"
                     android:textColor="@color/white"
-                    android:textSize="22sp" />
+                    android:background="@null"
+                    android:textSize="22sp">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/search"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginRight="15dp"
-                    android:src="@drawable/search" />
+                    <requestFocus />
+
+                </androidx.appcompat.widget.AppCompatEditText>
+
 
             </LinearLayout>
 
@@ -64,17 +70,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
-
-    <com.wang.avi.AVLoadingIndicatorView
-        android:id="@+id/loader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        app:indicatorColor="@color/white"
-        app:indicatorName="BallPulseIndicator"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

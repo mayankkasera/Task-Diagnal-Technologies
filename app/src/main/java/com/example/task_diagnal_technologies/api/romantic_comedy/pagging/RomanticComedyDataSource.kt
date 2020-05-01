@@ -15,9 +15,8 @@ class RomanticComedyDataSource(
     val romanticComedyRepositoryI: RomanticComedyRepositoryI
 ) : PageKeyedDataSource<Int, RomanticComedy.Page.ContentItems.Content>()  {
 
-    companion object{
-        val FIRST_PAGE = 1
-    }
+    val FIRST_PAGE = 1
+    var list : MutableList<RomanticComedy.Page.ContentItems.Content> = mutableListOf()
 
     val mutableLiveData: MutableLiveData<RomanticComedystate> = MutableLiveData()
 
@@ -38,7 +37,8 @@ class RomanticComedyDataSource(
                         it.page.contentItems.content[x] = p
                     }
 
-                    publishState(RomanticComedystate.Succes)
+                    list.addAll(it.page.contentItems.content)
+                    publishState(RomanticComedystate.Succes(list))
                     callback.onResult(it.page.contentItems.content, null, FIRST_PAGE + 1)
                 },{
                     publishState(RomanticComedystate.Failure(it.message!!))
@@ -61,6 +61,8 @@ class RomanticComedyDataSource(
                         it.page.contentItems.content[x] = p
                     }
                     if (3 >= params.key) {
+                        list.addAll(it.page.contentItems.content)
+                        publishState(RomanticComedystate.Succes(list))
                         callback.onResult(it.page.contentItems.content, params.key + 1)
                     }
                 },{
@@ -85,6 +87,10 @@ class RomanticComedyDataSource(
                         it.page.contentItems.content[x] = p
                     }
                     if (it != null) {
+
+                        list.addAll(it.page.contentItems.content)
+                        publishState(RomanticComedystate.Succes(list))
+
                         val i: Int = if (params.key > 1) params.key - 1 else 0
                         callback.onResult(it.page.contentItems.content, i)
                     }

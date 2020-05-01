@@ -41,6 +41,6 @@ class RomanticComedyPaggingAdapter  : PagedListAdapter<RomanticComedy.Page.Conte
     override fun onBindViewHolder(holder: RomanticComedyViewHolder, position: Int) {
         val result : RomanticComedy.Page.ContentItems.Content? = getItem(position)!!
         Picasso.get().load(Constants.baseImageUrl+result!!.posterImage).into(holder.image)
-        holder.text.text = "${result!!.id}"
+        holder.text.text = "${result!!.name}"
     }
 }

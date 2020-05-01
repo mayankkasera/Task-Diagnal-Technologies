@@ -1,7 +1,9 @@
 package com.example.task_diagnal_technologies.api.pojo
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 data class RomanticComedy(
     @SerializedName("page")
@@ -23,13 +25,14 @@ data class RomanticComedy(
             @SerializedName("content")
             var content: MutableList<Content> = mutableListOf()
         ) {
+            @Parcelize
             data class Content(
                 var id : Int = 0,
                 @SerializedName("name")
                 var name: String = "",
                 @SerializedName("poster-image")
                 var posterImage: String = ""
-            )
+            ) : Parcelable
         }
     }
 }
